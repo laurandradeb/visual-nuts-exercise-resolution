@@ -75,10 +75,8 @@
 
     function countsAllTheOfficialLanguages() {
       var officialLanguages = [];
-      countries.forEach((item) => {
-        item.languages.forEach((l) => {
-          if (!officialLanguages.includes(l)) officialLanguages.push(l);
-        });
+      countries.filter((c) => {
+          if (!officialLanguages.includes(c.languages)) officialLanguages.push(c.languages);
       });
 
       console.log(officialLanguages.length);
