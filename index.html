@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VN Javascript Exercise - Laura Andrade</title>
+    </style>
+  </head>
+  <body>
+  </body>
+  <script>
+    console.log("Exercise 01")
+    let amountOfNumbers = 100;
+    for (var i = 1; i < amountOfNumbers; i++) {
+      if (i % 3 == 0 && i % 5 == 0) console.log("Visual Nuts");
+      else if (i % 3 == 0) console.log("Visual");
+      else if (i % 5 == 0) console.log("Nuts");
+      else console.log(i);
+    }
+
+    console.log("Exercise 02")
+    var countries = [
+      {
+        country: "US",
+        languages: ["en"],
+      },
+      {
+        country: "BE",
+        languages: ["nl", "fr", "de"],
+      },
+      {
+        country: "NL",
+        languages: ["nl"],
+      },
+      {
+        country: "DE",
+        languages: ["de"],
+      },
+      {
+        country: "ES",
+        languages: ["es"],
+      },
+    ];
+    
+    console.log("The number of countries in the world: ");
+    numberOfCountries();
+    console.log("The country with the most official languages, where they officially speak German: ");
+    countryWithTheHighestNumberOfLanguagesAndSpeakGerman();
+    console.log("The count of all the official languages spoken in the listed countries: ");
+    countsAllTheOfficialLanguages()
+    console.log("The country with the highest number of official languages: ");
+    countryWithTheHighestNumberOfLanguages();
+    console.log("The most common official language(s), of all countries: ");
+    mostCommonOfficialLanguageOfAllCountries();
+
+    function numberOfCountries() {
+      console.log(countries.length);
+    }
+
+    function countryWithTheHighestNumberOfLanguagesAndSpeakGerman() {
+      var numberOfLanguages = 0;
+      var country;
+      countries.forEach((c) => {
+        if (
+          numberOfLanguages < c.languages.length &&
+          c.languages.includes("de")
+        ) {
+          numberOfLanguages = c.languages.length;
+          country = c;
+        }
+      });
+      console.log(country);
+    }
+
+    function countsAllTheOfficialLanguages() {
+      var officialLanguages = [];
+      countries.forEach((item) => {
+        item.languages.forEach((l) => {
+          if (!officialLanguages.includes(l)) officialLanguages.push(l);
+        });
+      });
+
+      console.log(officialLanguages.length);
+    }
+
+    function countryWithTheHighestNumberOfLanguages() {
+      var numberOfLanguages = 0;
+      var country;
+      countries.forEach((c) => {
+        if (numberOfLanguages < c.languages.length) {
+          numberOfLanguages = c.languages.length;
+          country = c;
+        }
+      });
+      console.log(country);
+    }
+
+    function mostCommonOfficialLanguageOfAllCountries() {
+      var languagesAndAmount = new Map();
+
+      countries.forEach((c) => {
+        c.languages.forEach((l) => {
+          if (!languagesAndAmount.get(l)) languagesAndAmount.set(l, 1);
+          else languagesAndAmount.set(l, languagesAndAmount.get(l) + 1);
+        });
+      });
+
+      let sortedLanguages = [...languagesAndAmount.entries()].sort((a,b) => (b[1]-a[1]));
+
+      let mostCommon = [];
+      sortedLanguages.filter(s => s[1] == sortedLanguages[0][1]).forEach(m => {mostCommon.push(m[0])});
+
+      console.log(mostCommon);
+    }
+  </script>
+</html>
